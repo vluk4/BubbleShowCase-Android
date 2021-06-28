@@ -32,6 +32,7 @@ class BubbleShowCaseBuilder{
     internal var mTargetView: WeakReference<View>? = null
     internal var mBubbleShowCaseListener: BubbleShowCaseListener? = null
     internal var mSequenceShowCaseListener: SequenceShowCaseListener? = null
+    internal var mBubbleShowCase: BubbleShowCase? = null
 
     private var onGlobalLayoutListenerTargetView: ViewTreeObserver.OnGlobalLayoutListener? = null
 
@@ -248,7 +249,7 @@ class BubbleShowCaseBuilder{
     /**
      * Build the BubbleShowCase object from the builder one
      */
-    private fun build(): BubbleShowCase {
+    fun build(): BubbleShowCase {
         if(mIsFirstOfSequence ==null)
             mIsFirstOfSequence = true
         if(mIsLastOfSequence ==null)
@@ -261,23 +262,25 @@ class BubbleShowCaseBuilder{
      * Show the BubbleShowCase using the params added previously
      */
     fun show(): BubbleShowCase{
-        val bubbleShowCase = build()
-        if (mTargetView != null) {
-            val targetView = mTargetView!!.get()
-            if (targetView!!.height == 0 || targetView.width == 0) {
-                //If the view is not already painted, we wait for it waiting for view changes using OnGlobalLayoutListener
-                onGlobalLayoutListenerTargetView = ViewTreeObserver.OnGlobalLayoutListener {
-                    bubbleShowCase.show()
-                    targetView.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListenerTargetView)
+        mBubbleShowCase = build()
+        mBubbleShowCase?.let {
+            if (mTargetView != null) {
+                val targetView = mTargetView!!.get()
+                if (targetView!!.height == 0 || targetView.width == 0) {
+                    //If the view is not already painted, we wait for it waiting for view changes using OnGlobalLayoutListener
+                    onGlobalLayoutListenerTargetView = ViewTreeObserver.OnGlobalLayoutListener {
+                        it.show()
+                        targetView.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListenerTargetView)
+                    }
+                    targetView.viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListenerTargetView)
+                } else {
+                    it.show()
                 }
-                targetView.viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListenerTargetView)
             } else {
-                bubbleShowCase.show()
+                it.show()
             }
-        } else {
-            bubbleShowCase.show()
         }
-        return bubbleShowCase
+        return mBubbleShowCase!!
     }
 
 }

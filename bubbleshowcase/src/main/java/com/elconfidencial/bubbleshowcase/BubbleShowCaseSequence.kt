@@ -26,12 +26,16 @@ class BubbleShowCaseSequence{
         if(position >= mBubbleShowCaseBuilderList.size)
             return
 
-        when(position){
-            0 -> {
+        when{
+            position == 0 && mBubbleShowCaseBuilderList.size == 1 -> {
+                mBubbleShowCaseBuilderList[position].isFirstOfSequence(true)
+                mBubbleShowCaseBuilderList[position].isLastOfSequence(true)
+            }
+            position == 0 -> {
                 mBubbleShowCaseBuilderList[position].isFirstOfSequence(true)
                 mBubbleShowCaseBuilderList[position].isLastOfSequence(false)
             }
-            mBubbleShowCaseBuilderList.size-1 -> {
+            position == mBubbleShowCaseBuilderList.size-1 -> {
                 mBubbleShowCaseBuilderList[position].isFirstOfSequence(false)
                 mBubbleShowCaseBuilderList[position].isLastOfSequence(true)
             }
@@ -47,4 +51,12 @@ class BubbleShowCaseSequence{
         }).show()
     }
 
+    fun finishSequence(){
+        mBubbleShowCaseBuilderList.forEach { builder ->
+            builder.mBubbleShowCase?.let { showCase ->
+                showCase.dismiss()
+            }
+        }
+        mBubbleShowCaseBuilderList.clear()
+    }
 }

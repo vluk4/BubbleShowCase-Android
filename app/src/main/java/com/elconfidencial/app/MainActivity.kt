@@ -1,4 +1,4 @@
-package com.elconfidencial.bubbleshowcase
+package com.elconfidencial.app
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,10 @@ import android.support.v7.view.menu.ActionMenuItemView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.elconfidencial.bubbleshowcase.BubbleShowCase
+import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder
+import com.elconfidencial.bubbleshowcase.BubbleShowCaseListener
+import com.elconfidencial.bubbleshowcase.BubbleShowCaseSequence
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -83,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                 .description("You can detect when the user interacts with the different view elements to act consequently.")
                 .backgroundColor(ContextCompat.getColor(this, R.color.colorOrange))
                 .image(ContextCompat.getDrawable(this, R.drawable.ic_sentiment_satisfied)!!)
-                .listener(object : BubbleShowCaseListener{
+                .listener(object : BubbleShowCaseListener {
                     override fun onBubbleClick(bubbleShowCase: BubbleShowCase) {
                         Toast.makeText(this@MainActivity, "OnBubbleClick", Toast.LENGTH_SHORT).show()
                     }

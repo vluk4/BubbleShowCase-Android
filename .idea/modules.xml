@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/BubbleShowCase-Android.iml" filepath="$PROJECT_DIR$/.idea/BubbleShowCase-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BubbleShowCase-Android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BubbleShowCase-Android.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/bubbleshowcase/BubbleShowCase-Android.bubbleshowcase.iml" filepath="$PROJECT_DIR$/.idea/modules/bubbleshowcase/BubbleShowCase-Android.bubbleshowcase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GitHub.BubbleShowCase-Android.iml" filepath="$PROJECT_DIR$/.idea/modules/GitHub.BubbleShowCase-Android.iml" />
     </modules>
   </component>
 </project>

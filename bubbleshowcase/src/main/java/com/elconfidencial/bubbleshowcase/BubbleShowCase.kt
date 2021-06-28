@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Handler
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -118,10 +119,13 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
             //Add the background dim layout above the root view
             val animation = AnimationUtils.getFadeInAnimation(0, DURATION_BACKGROUND_ANIMATION)
             backgroundDimLayout?.let { rootView.addView(AnimationUtils.setAnimationToView(backgroundDimLayout!!, animation)) }
+            Log.i("socorro","$backgroundDimLayout")
         }
     }
 
     fun dismiss() {
+        Log.i("socorro","$backgroundDimLayout - 2")
+        Log.i("socorro","$isLastOfSequence - 3")
         if (backgroundDimLayout != null && isLastOfSequence) {
             //Remove background dim layout if the BubbleShowCase is the last of the sequence
             finishSequence()
