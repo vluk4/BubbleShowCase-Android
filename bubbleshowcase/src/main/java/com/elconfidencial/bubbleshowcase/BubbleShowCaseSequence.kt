@@ -51,6 +51,10 @@ class BubbleShowCaseSequence{
         }).show()
     }
 
+    fun isSequenceEmpty(): Boolean{
+        return mBubbleShowCaseBuilderList.isEmpty()
+    }
+
     fun finishSequence(){
         mBubbleShowCaseBuilderList.forEach { builder ->
             builder.mBubbleShowCase?.let { showCase ->
