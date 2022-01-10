@@ -57,6 +57,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
     private val mTitle: String? = builder.mTitle
     private val mSubtitle: String? = builder.mSubtitle
     private val mCloseAction: Drawable? = builder.mCloseAction
+    private val enableDarkBackground: Boolean = builder.enableDarkBackground
     private val mBackgroundColor: Int? = builder.mBackgroundColor
     private val mTextColor: Int? = builder.mTextColor
     private val mTitleTextSize: Int? = builder.mTitleTextSize
@@ -105,7 +106,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
                 }
 
                 if (isVisibleOnScreen(target)) {
-                    addTargetViewAtBackgroundDimLayout(target, backgroundDimLayout)
+                    addTargetViewAtBackgroundDimLayout(target)
                     addBubbleMessageViewDependingOnTargetView(target, bubbleMessageViewBuilder!!, backgroundDimLayout)
                 } else {
                     dismiss()
@@ -153,7 +154,9 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
         val backgroundLayout = RelativeLayout(mActivity.get()!!)
         backgroundLayout.id = FOREGROUND_LAYOUT_ID
         backgroundLayout.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        backgroundLayout.setBackgroundColor(ContextCompat.getColor(mActivity.get()!!, R.color.transparent_grey))
+        if (enableDarkBackground) {
+            backgroundLayout.setBackgroundColor(ContextCompat.getColor(mActivity.get()!!, R.color.transparent_grey))
+        } else backgroundLayout.setBackgroundColor(ContextCompat.getColor(mActivity.get()!!, android.R.color.transparent))
         backgroundLayout.isClickable = true
         return backgroundLayout
     }
@@ -211,7 +214,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
     /**
      * This function takes a screenshot of the targetView, creating an ImageView from it. This new ImageView is also set on the layout passed by param
      */
-    private fun addTargetViewAtBackgroundDimLayout(targetView: View?, backgroundDimLayout: RelativeLayout?) {
+    private fun addTargetViewAtBackgroundDimLayout(targetView: View?) {
         if(targetView==null) return
 
         val targetScreenshot = takeScreenshot(targetView, mHighlightMode)
@@ -225,7 +228,6 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
 
         val targetViewParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
         targetViewParams.setMargins(getXposition(targetView), getYposition(targetView), getScreenWidth(mActivity.get()!!) - (getXposition(targetView) + targetView.width), 0)
-        backgroundDimLayout?.addView(AnimationUtils.setBouncingAnimation(targetScreenshotView, 0, DURATION_BEATING_ANIMATION), targetViewParams)
     }
 
     /**

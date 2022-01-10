@@ -18,6 +18,7 @@ class BubbleShowCaseBuilder{
     internal var mTitle: String? = null
     internal var mSubtitle: String? = null
     internal var mCloseAction: Drawable? = null
+    internal var enableDarkBackground: Boolean = false
     internal var mBackgroundColor: Int? = null
     internal var mTextColor: Int? = null
     internal var mTitleTextSize: Int? = null
@@ -111,6 +112,11 @@ class BubbleShowCaseBuilder{
      */
     fun backgroundColorResourceId(colorResId: Int): BubbleShowCaseBuilder {
         mBackgroundColor = ContextCompat.getColor(mActivity!!.get(), colorResId)
+        return this
+    }
+
+    fun enableDarkBackground(enabled: Boolean): BubbleShowCaseBuilder {
+        enableDarkBackground = enabled
         return this
     }
 
