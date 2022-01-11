@@ -106,7 +106,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
                 }
 
                 if (isVisibleOnScreen(target)) {
-                    addTargetViewAtBackgroundDimLayout(target)
+                    addTargetViewAtBackgroundDimLayout(target, backgroundDimLayout)
                     addBubbleMessageViewDependingOnTargetView(target, bubbleMessageViewBuilder!!, backgroundDimLayout)
                 } else {
                     dismiss()
@@ -214,7 +214,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
     /**
      * This function takes a screenshot of the targetView, creating an ImageView from it. This new ImageView is also set on the layout passed by param
      */
-    private fun addTargetViewAtBackgroundDimLayout(targetView: View?) {
+    private fun addTargetViewAtBackgroundDimLayout(targetView: View?, backgroundDimLayout: RelativeLayout?) {
         if(targetView==null) return
 
         val targetScreenshot = takeScreenshot(targetView, mHighlightMode)
@@ -228,6 +228,7 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
 
         val targetViewParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
         targetViewParams.setMargins(getXposition(targetView), getYposition(targetView), getScreenWidth(mActivity.get()!!) - (getXposition(targetView) + targetView.width), 0)
+        backgroundDimLayout?.addView(targetScreenshotView, targetViewParams)
     }
 
     /**
@@ -297,13 +298,13 @@ class BubbleShowCase(builder: BubbleShowCaseBuilder){
                             if (isTablet()) getXposition(targetView) else 0,
                             0,
                             if (isTablet()) getScreenWidth(mActivity.get()!!) - getXposition(targetView) - getMessageViewWidthOnTablet(getScreenWidth(mActivity.get()!!) - getXposition(targetView)) else 0,
-                            getScreenHeight(mActivity.get()!!) - getYposition(targetView))
+                            getScreenHeight(mActivity.get()!!) - getYposition(targetView) + 40)
                 } else {
                     showCaseParams.setMargins(
                             if (isTablet()) getXposition(targetView) + targetView.width - getMessageViewWidthOnTablet(getXposition(targetView)) else 0,
                             0,
                             if (isTablet()) getScreenWidth(mActivity.get()!!) - getXposition(targetView) - targetView.width else 0,
-                            getScreenHeight(mActivity.get()!!) - getYposition(targetView))
+                            getScreenHeight(mActivity.get()!!) - getYposition(targetView) + 40)
                 }
             }
         }

@@ -33,19 +33,6 @@ object AnimationUtils {
         return fadeIn
     }
 
-    fun setBouncingAnimation(view: View, offset: Int, duration: Int): View {
-
-        val objAnim = ObjectAnimator.ofPropertyValuesHolder(view,
-                PropertyValuesHolder.ofFloat("scaleX", 1.05f),
-                PropertyValuesHolder.ofFloat("scaleY", 1.05f))
-        objAnim.duration = duration.toLong()
-        objAnim.startDelay = offset.toLong()
-        objAnim.repeatCount = ObjectAnimator.INFINITE
-        objAnim.repeatMode = ObjectAnimator.REVERSE
-        objAnim.start()
-        return view
-    }
-
     fun setAnimationToView(view: View, animation: Animation): View {
         view.startAnimation(animation)
         return view
