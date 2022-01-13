@@ -84,10 +84,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun getListenerShowCaseBuilder(): BubbleShowCaseBuilder {
         return BubbleShowCaseBuilder(this)
-            .title("Listen user actions!")
+            .title("Deseja adicionar mais informações?")
             .description("You can detect when the user interacts with the different view elements to act consequently.")
             .backgroundColor(ContextCompat.getColor(this, R.color.colorOrange))
-            .image(ContextCompat.getDrawable(this, R.drawable.ic_sentiment_satisfied)!!)
             .listener(object : BubbleShowCaseListener {
                 override fun onBubbleClick(bubbleShowCase: BubbleShowCase) {
                     Toast.makeText(this@MainActivity, "OnBubbleClick", Toast.LENGTH_SHORT).show()
